@@ -1,8 +1,17 @@
 \c live025
 
-INSERT INTO orders(customer_id, amount) VALUES (10, 199.95);
+--INSERT INTO orders(customer_id, amount) VALUES (10, 199.95);
+--INSERT INTO orders(amount) VALUES (99);
+--DELETE FROM orders WHERE customer_id = 9;
 
 SELECT * FROM customers AS cus
-JOIN orders AS ord ON ord.customer_id = cus.id
-WHERE cus.id = 10
+LEFT JOIN orders AS ord ON ord.customer_id = cus.id
+ORDER BY cus.id
 ;
+
+-- 5 TIPOS DE JOINS:
+-- JOIN (INNER JOIN)
+-- LEFT JOIN (LEFT OUTER JOIN)
+-- RIGHT JOIN (RIGHT OUTER JOIN)
+-- FULL JOIN (FULL OUTER JOIN)
+-- CROSS JOIN
