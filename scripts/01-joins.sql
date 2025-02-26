@@ -6,11 +6,23 @@
 
 SELECT 
   cus.*,
-  JSON_AGG(ord)
+  CASE
+    WHEN COUNT(ord.id) > 0 THEN
+      JSON_AGG(
+        JSON_STRIP_NULLS(
+          JSON_BUILD_OBJECT(
+            'id', ord.id,
+            'amount', ord.amount
+          )
+        )
+      )
+    ELSE
+      '[]'::JSON
+  END AS orders
 FROM customers AS cus
 LEFT JOIN orders AS ord ON ord.customer_id = cus.id
+WHERE cus.id = 10
 GROUP BY cus.id
-ORDER BY cus.id
 ;
 
 -- 5 TIPOS DE JOINS:
