@@ -4,8 +4,12 @@
 --INSERT INTO orders(amount) VALUES (99);
 --DELETE FROM orders WHERE customer_id = 9;
 
-SELECT * FROM customers AS cus
+SELECT 
+  cus.*,
+  JSON_AGG(ord)
+FROM customers AS cus
 LEFT JOIN orders AS ord ON ord.customer_id = cus.id
+GROUP BY cus.id
 ORDER BY cus.id
 ;
 
@@ -15,3 +19,5 @@ ORDER BY cus.id
 -- RIGHT JOIN (RIGHT OUTER JOIN)
 -- FULL JOIN (FULL OUTER JOIN)
 -- CROSS JOIN
+
+-- AGG => Aggregate
